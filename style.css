@@ -1,24 +1,79 @@
-body{
+body {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: aliceblue;
+    background: linear-gradient(-45deg, red, green, blue, red, yellow, red, purple, lavender);
+    background-size: 400% 400%;
+    animation: gradientBackground 10s ease infinite;
     margin: 0;
 }
-.Calculator{
-    background-color: black;
+
+@keyframes gradientBackground {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.Calculator {
+    background-color: rgb(37, 37, 37);
     border-radius: 20px;
     padding: 20px;
     box-shadow: 0 0 10px;
 }
-.display{
-    background-color: bisque;
-    color: brown;
+
+.display {
+    background-color: hsl(35, 59%, 73%);
+    color: rgb(144, 116, 79);
     font-size: 1.35em;
     padding: 10px;
     border-radius: 20px;
     border: 20px;
     margin-bottom: 15px;
     text-align: right;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.button {
+    background-color: black;
+    color: aliceblue;
+    font-size: 0.90em;
+    border: none;
+    border-radius: 25%;
+    padding: 8.5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button.operator {
+    background-color: rgba(207, 142, 2, 0.989);
+}
+
+.buttonzero {
+    grid-column: span ;
+    border-radius: 25%;
+    font-size: 0.90em;
+    cursor: pointer;
+}
+
+.buttondelete {
+    border-radius: 15px;
+    font-size: 0.90em;
+    background-color: rgba(207, 142, 2, 0.989);
+    color: white;
+    cursor: pointer;
 }
