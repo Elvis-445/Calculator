@@ -3,7 +3,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: linear-gradient(-45deg, red, green, blue, red, yellow, red, purple, lavender);
+    background: linear-gradient(-45deg, red, green, rgb(145, 8, 92), blue, red, yellow, blue, red, purple, lavender);
     background-size: 400% 400%;
     animation: gradientBackground 10s ease infinite;
     margin: 0;
@@ -22,14 +22,14 @@ body {
 }
 
 .Calculator {
-    background-color: rgb(37, 37, 37);
+    background-color: rgb(33, 33, 33);
     border-radius: 20px;
     padding: 20px;
     box-shadow: 0 0 10px;
 }
 
 .display {
-    background-color: hsl(35, 59%, 73%);
+    background-color: hsl(35, 45%, 64%);
     color: rgb(144, 116, 79);
     font-size: 1.35em;
     padding: 10px;
