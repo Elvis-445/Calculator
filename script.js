@@ -1,46 +1,46 @@
-const calculator={
-    displayValue:"0",
-    firstOperand:null,
-    waitingForSecondOperand:false,
-    operator:null
+const calculator = {
+    displayValue: "0",
+    firstOperand: null,
+    waitingForSecondOperand: false,
+    operator: null,
 };
 
-function updateDisplay(){
+function updateDisplay() {
     const display = document.querySelector(".display");
     display.textContent = calculator.displayValue;
 }
 
-function inputDigit(digit){
+function inputDigit(digit) {
     const { displayValue, waitingForSecondOperand } = calculator;
     if (waitingForSecondOperand === true) {
         calculator.displayValue = digit;
-        calculator.waitingForSecondOperand = false
-    }else{
-        calculator.displayValue = 
-        displayValue === "0" ? digit : displayValue + digit;
+        calculator.waitingForSecondOperand = false;
+    } else {
+        calculator.displayValue = displayValue === "0" ? digit : displayValue + digit;
     }
     updateDisplay();
 }
 
-function inputDecimal(dot){
+function inputDecimal(dot) {
     if (!calculator.displayValue.includes(dot)) {
-        calculator.displayValue+= dot;
+        calculator.displayValue += dot;
     }
     updateDisplay();
 }
 
-function handleOperator(nextOperator){
+function handleOperator(nextOperator) {
     const { firstOperand, displayValue, operator } = calculator;
-    const inputValue = parseFloat(displayValue)
+    const inputValue = parseFloat(displayValue);
 
     if (operator && calculator.waitingForSecondOperand) {
         calculator.operator = nextOperator;
         return;
     }
+
     if (firstOperand == null && !isNaN(inputValue)) {
         calculator.firstOperand = inputValue;
     } else if (operator) {
-        const result = performCalculation[operator](firstOperand, inputValue);
+        const result = performOperation[operator](firstOperand, inputValue);
 
         calculator.displayValue = String(result);
         calculator.firstOperand = result;
@@ -51,15 +51,15 @@ function handleOperator(nextOperator){
     updateDisplay();
 }
 
-const performOperation={
+const performOperation = {
     "+": (firstOperand, secondOperand) => firstOperand + secondOperand,
     "-": (firstOperand, secondOperand) => firstOperand - secondOperand,
-    "x": (firstOperand, secondOperand) => firstOperand * secondOperand,
+    "×": (firstOperand, secondOperand) => firstOperand * secondOperand,
     "÷": (firstOperand, secondOperand) => firstOperand / secondOperand,
     "=": (firstOperand, secondOperand) => secondOperand,
 };
 
-function resetCalculator(){
+function resetCalculator() {
     calculator.displayValue = "0";
     calculator.firstOperand = null;
     calculator.waitingForSecondOperand = false;
@@ -67,17 +67,17 @@ function resetCalculator(){
     updateDisplay();
 }
 
-function toggleSign(){
+function toggleSign() {
     calculator.displayValue = String(parseFloat(calculator.displayValue) * -1);
     updateDisplay();
 }
 
-function handlePercentage(){
+function handlePercentage() {
     calculator.displayValue = String(parseFloat(calculator.displayValue) / 100);
     updateDisplay();
 }
 
-function deletelastDigit(){
+function deleteLastDigit() {
     calculator.displayValue = calculator.displayValue.slice(0, -1);
     if (calculator.displayValue === "") {
         calculator.displayValue = "0";
@@ -85,35 +85,36 @@ function deletelastDigit(){
     updateDisplay();
 }
 
-const keys=document.querySelector(".buttons");
+const keys = document.querySelector(".buttons");
 keys.addEventListener("click", (event) => {
     const { target } = event;
 
-if(!target.matches(buttons)){
-    return;
-}
-if (target.textContent === "C") {
-    resetCalculator();
-    return;
-}
-if (target.textContent === "+/-") {
-    toggleSign();
-    return;
-}
-if (target.textContent === "%") {
-    handlePercentage();
-    return;
-}
-if (target.classList.contains("operator")) {
-    handleOperator(target.textContent);
-    return;
-}
-if (target.textContent === ".") {
-    inputDecimal(target.textContent);
-    return;
-}
-if (target.textContent === "↩") {
-    deletelastDigit();
-    return;
-}
-inputDigit(target.textContent);});
+    if (!target.matches(".button")) {
+        return;
+    }
+    if (target.textContent === "C") {
+        resetCalculator();
+        return;
+    }
+    if (target.textContent === "+/-") {
+        toggleSign();
+        return;
+    }
+    if (target.textContent === "%") {
+        handlePercentage();
+        return;
+    }
+    if (target.classList.contains("operator")) {
+        handleOperator(target.textContent);
+        return;
+    }
+    if (target.textContent === ".") {
+        inputDecimal(target.textContent);
+        return;
+    }
+    if (target.textContent === "↩") {
+        deleteLastDigit();
+        return;
+    }
+    inputDigit(target.textContent);
+});
